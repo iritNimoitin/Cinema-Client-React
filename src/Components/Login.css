@@ -1,0 +1,11 @@
+.Login {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: smaller;
+}
+.Login .error {
+	color: red;
+    margin: 0 20px;
+}

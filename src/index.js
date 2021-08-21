@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import UserReducer from '../src/Redux/UserReducer';
+import MovieReducer from '../src/Redux/MoviesReducer';
+import { combineReducers } from 'redux'
+
+const allReducers = combineReducers({
+  users: UserReducer,
+  movies: MovieReducer
+})
+export default allReducers;
+
+const appStore = createStore(allReducers);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={appStore}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
