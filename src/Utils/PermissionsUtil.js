@@ -1,7 +1,10 @@
 import axios from 'axios'
 
 const getAllPermissions = () => {
-    return axios.get("http://localhost:8001/api/permissions");
+    return axios.get("http://localhost:8000/api/permissions");
 }
-
-export default { getAllPermissions }
+const getPermissionsById = (id) => {
+    console.log(id);
+    return axios.get("http://localhost:8000/api/permissions" + "/" + id);
+}
+export default { getAllPermissions, getPermissionsById }

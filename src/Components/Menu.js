@@ -6,6 +6,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
+import { useEffect, useState } from 'react';
 import { Switch, Route, Link, BrowserRouter, useHistory, NavLink } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +30,9 @@ export default function ControlledAccordions() {
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [permissions, setPermissions] = useState({})
+    const [username, setUsername] = useState({})
+
 
     const displayUsers = () => {
         history.push('/users')
@@ -39,7 +43,12 @@ export default function ControlledAccordions() {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-
+    useEffect(() => {
+        let permissions = window.sessionStorage.getItem("permissions");
+        let username = window.sessionStorage.getItem("username");
+        setPermissions(permissions);
+        setUsername(username);
+    }, [])
     return (
         <div className={classes.root} style={{ borderStyle: "solid", borderColor: "blue", borderWidth: "1px" }}>
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} style={{ borderStyle: "solid", borderColor: "black", borderWidth: "1px" }}>
@@ -48,9 +57,13 @@ export default function ControlledAccordions() {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography className={classes.heading}><Button variant="contained" color="primary" onClick={displayMovies} >
-                        Movies
-                    </Button>
+                    <Typography className={classes.heading}>
+                        {/* {(permissions?.includes("View Movies") || username == "Admin") ?
+                            <>
+                                <Button variant="contained" color="primary" onClick={displayMovies} >
+                                    Movies
+                                </Button>
+                            </> : null} */}
                     </Typography>
                     <Typography className={classes.secondaryHeading}>all movies presented</Typography>
                 </AccordionSummary>
@@ -85,9 +98,14 @@ export default function ControlledAccordions() {
                     aria-controls="panel3bh-content"
                     id="panel3bh-header"
                 >
-                    <Typography className={classes.heading}><Button variant="contained" color="primary" onClick={displayUsers}>
+                    <Typography className={classes.heading}>
+                        {/* {(permissions?.includes("View Movies") || username == "Admin") ?
+                      <>
+                        <Button variant="contained" color="primary" onClick={displayUsers}>
                         Users management
-                    </Button></Typography>
+                    </Button>
+                    </> : null} */}
+                    </Typography>
                     <Typography className={classes.secondaryHeading}>
                         manage all users existing in the system
                     </Typography>

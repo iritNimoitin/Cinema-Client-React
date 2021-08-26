@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import './Login.css'
 import { Switch, Route, Link, BrowserRouter, useHistory, NavLink } from 'react-router-dom'
 import notify from '../Services/Notifications';
+import PermissionsUtil from '../Utils/PermissionsUtil';
 
 
 
@@ -21,8 +22,11 @@ function Login() {
             password: user.password
         }
         let resp = await axios.post("http://localhost:8000/api/login/", null, { headers });
-        console.log(resp.data);
         if (resp.data.valid) {
+            let resp1 = await PermissionsUtil.getPermissionsById(resp.data.id);
+            // let userData = { username: resp.data.username, permissions: resp1.data.permissions }
+            window.sessionStorage.setItem("permissions", resp1.data.permissions);
+            window.sessionStorage.setItem("username", resp.data.username);
             notify.success('you have been logged successfully!')
             history.push('/menu');
         } else {
