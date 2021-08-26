@@ -51,7 +51,7 @@ function AddUser() {
         setPermissions({ ...permissions, [event.target.name]: event.target.checked });
     };
     const cancel = () => {
-        history.push('/menu');
+        history.push('/users');
     }
 
 

@@ -8,10 +8,12 @@ import { Provider } from 'react-redux'
 import UserReducer from '../src/Redux/UserReducer';
 import MovieReducer from '../src/Redux/MoviesReducer';
 import { combineReducers } from 'redux'
+import SubscriptionsReducer from './Redux/SubscriptionsReducer';
 
 const allReducers = combineReducers({
   users: UserReducer,
-  movies: MovieReducer
+  movies: MovieReducer,
+  subscriptions: SubscriptionsReducer
 })
 export default allReducers;
 

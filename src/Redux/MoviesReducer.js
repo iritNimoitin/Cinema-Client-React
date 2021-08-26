@@ -2,13 +2,13 @@ const MoviesReducer = (state = { movies: [] }, action) => {
     switch (action.type) {
         case "REPLACEALLMOVIES":
             return { ...state, movies: action.payload }
-        case "ADD":
+        case "ADDMOVIE":
             return { ...state, movies: [...state.movies, action.payload] }
 
-        case "UPDATE":
+        case "UPDATEMOVIES":
 
             let arr = state.movies;
-            let index = arr.findIndex(x => x.id == action.payload.id)
+            let index = arr.findIndex(x => x._id == action.payload._id)
             if (index >= 0) {
                 arr[index] = action.payload
             }
@@ -16,10 +16,10 @@ const MoviesReducer = (state = { movies: [] }, action) => {
             return { ...state, movies: arr }
 
 
-        case "DELETE":
+        case "DELETEMOVIES":
 
             let arr2 = state.movies;
-            let index2 = arr2.findIndex(x => x.id == action.payload)
+            let index2 = arr2.findIndex(x => x._id == action.payload)
             if (index2 >= 0) {
                 arr2.splice(index2, 1)
             }

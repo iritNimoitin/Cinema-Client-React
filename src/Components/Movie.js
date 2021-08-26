@@ -48,13 +48,17 @@ export default function Movie(props) {
     const history = useHistory();
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        setMovie(props.movieData)
+    }, [props.movieData])
+
     const update = () => {
-        history.push('/updateMovie/' + movie.id)
+        history.push('/updateMovie/' + movie._id)
     }
     const deleteMovie = async (e) => {
         e.preventDefault();
-        await MoviesUtil.deleteMovie();
-        dispatch({ type: "DELETE", payload: movie.id })
+        await MoviesUtil.deleteMovie(movie.id);
+        dispatch({ type: "DELETEMOVIES", payload: movie.id })
     }
 
 
@@ -71,11 +75,13 @@ export default function Movie(props) {
                         {movie.Name} <br /> {movie.Premiered.toString().slice(0, 10)} <br />
                     </Typography>
                     <Typography variant="h6">
-                        {movie.Genres.map(genre => genre + " ")}
+                        {movie.Genres?.map(genre => genre + " ")}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                            &nbsp;&nbsp;&nbsp;<b>Subscriptions watched</b>
+                            <ul> {movie.movieSubs.map(movieSub => <li key={movieSub.MemberId}><Link to={"/member/" + movieSub.MemberId}>{movieSub.MemberName}</Link> ,{movieSub.date}</li>)}</ul>
+                        </div>
                     </Typography>
                 </CardContent>
             </CardActionArea>

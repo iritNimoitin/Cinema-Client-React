@@ -6,6 +6,8 @@ import AllUsers from "../Components/AllUsers";
 import UpdateUser from "../Components/UpdateUser";
 import AddUser from "../Components/AddUser";
 import AllMovies from "../Components/AllMovies";
+import AddMovie from "../Components/AddMovie";
+import UpdateMovie from "../Components/UpdateMovie";
 
 function Routing() {
     return (
@@ -19,6 +21,8 @@ function Routing() {
                 <Route exact path="/updateUser/:id" component={UpdateUser} />
                 <Route exact path="/addUser" component={AddUser} />
                 <Route exact path="/movies" component={AllMovies} />
+                <Route exact path="/addMovie" component={AddMovie} />
+                <Route exact path="/updateMovie/:id" component={UpdateMovie} />
             </Switch>
         </div>
     );

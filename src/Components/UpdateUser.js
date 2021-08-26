@@ -54,7 +54,6 @@ function UpdateUser(props) {
         history.push('/menu');
     }
 
-
     const updateUser = async (e) => {
         e.preventDefault();
         var keys = Object.keys(permissions);
